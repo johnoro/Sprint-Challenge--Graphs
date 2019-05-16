@@ -15,7 +15,20 @@ player = Player("Name", world.startingRoom)
 
 
 # FILL THIS IN
-traversalPath = ['n', 'n']
+queue = Queue(['n'])
+visited = set()
+while len(queue) > 0:
+    path = queue.dequeue()
+    v = path[-1]
+    if v == '?':
+        break
+    if v not in visited:
+        visited.add(v)
+        for sv in self.vertices[v]:
+            if sv not in visited:
+                queue.enqueue(path + [sv])
+print(path)
+traversalPath = path
 
 
 # TRAVERSAL TEST
