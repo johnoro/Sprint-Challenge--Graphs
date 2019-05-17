@@ -8,6 +8,6 @@ class Player:
 		if nextRoom is not None:
 			self.currentRoom = nextRoom
 			if (showRooms):
-				nextRoom.printRoomDescription(self)
+				nextRoom.printRoomDescription()
 		else:
 			print('You cannot move in that direction.')

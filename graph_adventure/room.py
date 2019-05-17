@@ -15,7 +15,7 @@ class Room:
 	def __str__(self):
 		return f"\n-------------------\n\n{self.name}\n\n   {self.description}\n\n{self.getExitsString()}\n"
 	
-	def printRoomDescription(self, player):
+	def printRoomDescription(self):
 		print(str(self))
 	
 	def getExits(self):
