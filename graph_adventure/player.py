@@ -7,7 +7,7 @@ class Player:
 		nextRoom = self.currentRoom.getRoomInDirection(direction)
 		if nextRoom is not None:
 			self.currentRoom = nextRoom
-			if (showRooms):
+			if showRooms:
 				nextRoom.printRoomDescription()
 		else:
 			print('You cannot move in that direction.')

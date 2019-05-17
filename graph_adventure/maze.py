@@ -75,11 +75,17 @@ class Maze:
 		self.reset()
 		self.player.currentRoom.printRoomDescription()
 		while True:
-			cmds = input("-> ").lower().split(" ")
-			if cmds[0] in ["n", "s", "e", "w"]:
+			try:
+				cmds = input('-> ').lower().split(' ')
+			except:
+				print('\nGoodbye!')
+				break
+			
+			if cmds[0] in 'nsew':
 				self.player.travel(cmds[0], True)
 			else:
-				print("I did not understand that command.")
+				print('\nI did not understand that command.')
+				print('To exit from your terminal, use control/command + Z.\n')
 
 	def reset(self, initial = False):
 		self.resetStorage()
