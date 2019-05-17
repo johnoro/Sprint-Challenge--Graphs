@@ -3,6 +3,7 @@ from player import Player
 from world import World
 from roomGraphs import largest as roomGraph
 from queue import Queue
+from oppositeDirs import opposite
 
 from random import randint
 
@@ -12,8 +13,6 @@ class Maze:
 		self.world.loadGraph(roomGraph)
 
 		self.player = Player(playerName, self.world.startingRoom)
-		
-		self.inverse = {'n': 's', 'w': 'e', 's': 'n', 'e': 'w'}
 
 		self.reset(initial=True)
 
@@ -66,7 +65,7 @@ class Maze:
 				self.graph[end] = {}
 				for _exit in self.player.currentRoom.getExits():
 					self.graph[end][_exit] = '?'
-			self.graph[end][self.inverse[_next]] = start
+			self.graph[end][opposite[_next]] = start
 			if len(self.queue) == 0:
 				self.buildQueue()
 		return self.traversal

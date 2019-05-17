@@ -25,4 +25,4 @@ else:
 print()
 
 # UNCOMMENT BELOW LINE TO WALK AROUND
-# maze.manualTest()
+maze.manualTest()

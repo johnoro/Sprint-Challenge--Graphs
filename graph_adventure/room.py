@@ -1,5 +1,5 @@
-# Implement a class to hold room information. This should have name and
-# description attributes.
+from oppositeDirs import opposite
+
 class Room:
 	def __init__(self, name, description, _id=0, x=None, y=None):
 		self.id = _id
@@ -18,47 +18,32 @@ class Room:
 	def printRoomDescription(self):
 		print(str(self))
 	
+	def getDir(self, d):
+		return getattr(self, f'{d}_to')
+	
+	def setDir(self, d, room):
+		setattr(self, f'{d}_to', room)
+
 	def getExits(self):
 		exits = []
-		if self.n_to is not None:
-			exits.append("n")
-		if self.s_to is not None:
-			exits.append("s")
-		if self.w_to is not None:
-			exits.append("w")
-		if self.e_to is not None:
-			exits.append("e")
+		for d in 'nswe':
+			if self.getDir(d) is not None:
+				exits.append(d)
 		return exits
 	
 	def getExitsString(self):
 		return f"Exits: [{', '.join(self.getExits())}]"
 	
 	def connectRooms(self, direction, connectingRoom):
-		if direction == "n":
-			self.n_to = connectingRoom
-			connectingRoom.s_to = self
-		elif direction == "s":
-			self.s_to = connectingRoom
-			connectingRoom.n_to = self
-		elif direction == "e":
-			self.e_to = connectingRoom
-			connectingRoom.w_to = self
-		elif direction == "w":
-			self.w_to = connectingRoom
-			connectingRoom.e_to = self
+		if direction in 'nsew':
+			self.setDir(direction, connectingRoom)
+			connectingRoom.setDir(opposite[direction], self)
 		else:
 			print("INVALID ROOM CONNECTION")
-			return None
 	
 	def getRoomInDirection(self, direction):
-		if direction == "n":
-			return self.n_to
-		elif direction == "s":
-			return self.s_to
-		elif direction == "e":
-			return self.e_to
-		elif direction == "w":
-			return self.w_to
+		if direction in 'nsew':
+			return self.getDir(direction)
 		else:
 			return None
 	
